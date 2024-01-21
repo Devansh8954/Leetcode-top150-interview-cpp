@@ -52,6 +52,7 @@ public:
     }
 };
 */
+/*SOLUTION 2
 
 class Solution {
 public:
@@ -73,3 +74,24 @@ public:
     }
 };
 
+*/
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int n= nums.size();
+        if(n==1) return nums[0];
+
+        int prevprev = 0,temp=0;
+        int prev = nums[0];
+        for(int i=2;i<=n;i++){
+            int steal = nums[i-1] + prevprev;
+            int skip = prev;
+
+            temp = max(steal,skip);
+            prevprev = prev;
+            prev = temp;
+        }
+        return prev;
+    }
+};
