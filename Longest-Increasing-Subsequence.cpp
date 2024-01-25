@@ -63,4 +63,32 @@ public:
         return solve(nums, 0, -1, n, dp);
     }
 };
+
+class Solution {
+public:
+    int solve(vector<int>& a){
+        int n = a.size();
+        vector<int> currRow(n+1, 0);
+        vector<int> nextRow(n+1, 0);
+
+        for(int curr=n-1; curr>=0; curr--){
+            for(int pre = curr-1; pre>=-1; pre--){
+              int include=0;
+              if(pre == -1 || a[pre]<a[curr]){
+                 include = 1 + nextRow[curr+1];
+              }
+        
+            int exclude = nextRow[pre+1];
+
+            currRow[pre+1] = max(include,exclude);
+            }
+            nextRow = currRow;
+          }
+          return nextRow[0];
+    }
+
+    int lengthOfLIS(vector<int>& nums) {
+        return solve(nums);
+    }
+};
 */
