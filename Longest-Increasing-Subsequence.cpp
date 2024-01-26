@@ -92,3 +92,27 @@ public:
     }
 };
 */
+
+class Solution {
+public:
+    int solve(vector<int>& a){
+        int n = a.size();
+        if(n==0) return 0;
+
+        vector<int> ans;
+        ans.push_back(a[0]);
+        for(int i=1; i<n; i++){
+            if(ans.back() < a[i]){
+                ans.push_back(a[i]);
+            } else {
+                int index = lower_bound(ans.begin(), ans.end(), a[i]) - ans.begin();
+                ans[index] = a[i];
+            }
+        }
+        return ans.size();
+    }
+
+    int lengthOfLIS(vector<int>& nums) {
+        return solve(nums);
+    }
+};
