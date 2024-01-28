@@ -65,3 +65,31 @@ public:
     }
 };
 */
+
+class Solution {
+public:
+    int solve(vector<int>& c, int x){
+    vector<int> dp(x+1 , INT_MAX);
+    dp[0] = 0;
+
+    for(int i=1; i<=x; i++){
+        for(int j=0; j<c.size();j++){
+            if(i-c[j] >= 0 && dp[i-c[j]] != INT_MAX){
+                dp[i] = min(dp[i], 1+dp[i-c[j]]);
+            }
+            
+        }
+
+    }
+    if(dp[x] == INT_MAX){
+        return -1;
+    }
+    return dp[x];
+    }
+
+    
+
+    int coinChange(vector<int>& coins, int amount) {
+        return solve(coins, amount);
+    }
+};
