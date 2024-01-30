@@ -27,7 +27,6 @@ s and t consist of lowercase English letters.
  
 
 Follow up: What if the inputs contain Unicode characters? How would you adapt your solution to such a case?
-*/
 
 class Solution {
 public:
@@ -48,5 +47,27 @@ public:
         }
 
         return true;
+    }
+};
+*/
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        int count[26] = {0};
+
+        for(char c : s)
+            count[c - 'a']++;
+
+        for(char c : t)
+            count[c - 'a']--;
+
+        for (int val : count) {
+            if (val != 0) {
+                return false;
+            }
+        }
+
+        return true; 
     }
 };
