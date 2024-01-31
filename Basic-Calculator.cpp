@@ -81,3 +81,41 @@ public:
     }
 };
 */
+
+class Solution {
+public:
+    int calculate(string s) {
+        int currSum = 0, sign = 1;
+        stack<int> st;
+        
+        for (int i = 0 ; i < s.size() ; ++i) {
+            if (isdigit(s[i])) {
+                int num = 0;
+                while (i < s.size() && isdigit(s[i])) {
+                    num *= 10;
+                    num += s[i] - '0';
+                    ++i;
+                }
+
+                --i;
+                currSum += (sign * num);
+            }
+            else if (s[i] == '-' || s[i] == '+') {
+                sign = (s[i] == '-') ? -1 : 1;
+            }
+            else if (s[i] == '(') {
+                st.push(currSum);
+                st.push(sign);
+                currSum = 0;
+                sign = 1;
+            }
+            else if (s[i] == ')') {
+                int prevSign = st.top(); st.pop();
+                int prevSum = st.top(); st.pop();
+                currSum = (prevSum + prevSign * currSum);
+            }
+        }
+
+        return currSum;
+    }
+};
