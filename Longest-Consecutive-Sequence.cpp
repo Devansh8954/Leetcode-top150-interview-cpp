@@ -51,3 +51,39 @@ public:
     }
 };
 */
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        int n = nums.size();
+        if(n == 0) return 0;
+
+        unordered_map<int,bool> mp;
+        int ans = 0;
+        for(int num : nums){
+            mp[num] = false;
+        }
+
+        for(int num: nums){
+            int currentlength = 1;
+
+            int nextNum = num+1;
+            while(mp.find(nextNum) != mp.end() && mp[nextNum] == false){
+                currentlength++;
+                mp[nextNum] = true;
+                nextNum++;
+            }
+
+            int prevNum = num-1;
+            while(mp.find(prevNum) != mp.end() && mp[prevNum] == false){
+                currentlength++;
+                mp[prevNum] = true;
+                prevNum--;
+            }
+
+            ans = max(ans,currentlength);
+        }
+
+        return ans;
+    }
+};
