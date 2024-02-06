@@ -27,7 +27,8 @@ Constraints:
 1 <= nums.length <= 105
 -109 <= nums[i] <= 109
 0 <= k <= 105
-*/
+
+//SOLUTION
 
 class Solution {
 public:
@@ -45,6 +46,26 @@ public:
             }
             mp.insert(nums[j]);
             j++;
+        }
+
+        return false;
+    }
+};
+*/
+
+class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+        unordered_map<int,int> mp;
+        int n = nums.size();
+        int i=0;
+        while(i<n){
+            if(mp.count(nums[i])){
+                if(abs(i-mp[nums[i]])<=k)
+                    return true;
+            }
+            mp[nums[i]] = i;
+            i++;
         }
 
         return false;
