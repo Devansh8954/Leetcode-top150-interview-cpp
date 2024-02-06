@@ -50,7 +50,6 @@ public:
         return max(ans,temp);
     }
 };
-*/
 
 class Solution {
 public:
@@ -82,6 +81,35 @@ public:
             }
 
             ans = max(ans,currentlength);
+        }
+
+        return ans;
+    }
+};
+*/
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        int n = nums.size();
+        if(n == 0) return 0;
+
+        unordered_set<int> mp;
+        int ans = 1;
+        for(int num : nums){
+            mp.insert(num);;
+        }
+
+        for(auto it: mp){
+            if(mp.find(it-1) == mp.end()){
+                int curr = 1;
+                int x = it;
+                while(mp.find(x+1) != mp.end()){
+                    x++;
+                    curr++;
+                }
+                ans = max(ans,curr);
+            }
         }
 
         return ans;
