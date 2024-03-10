@@ -25,7 +25,6 @@ Output: 0
 Constraints:
 
 0 <= left <= right <= 231 - 1
-*/
 
 class Solution {
 public:
@@ -37,5 +36,17 @@ public:
             shiftcount++;
         }
         return (left << shiftcount);
+    }
+};
+*/
+
+class Solution {
+public:
+    int rangeBitwiseAnd(int l, int r) {
+      while(r>l)
+        {
+            r&=r-1;
+        }
+        return r;
     }
 };
